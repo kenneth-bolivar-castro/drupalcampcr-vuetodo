@@ -1,0 +1,7 @@
+name: 'vue_todo'
+type: module
+description: 'Vue.js TODO'
+core: 8.x
+package: 'keboca'
+dependencies:
+  - restui
