@@ -2,9 +2,8 @@
 
 namespace Drupal\vue_todo\Plugin\rest\resource;
 
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountProxyInterface;
-use Drupal\rest\ModifiedResourceResponse;
+use Drupal\Core\State\StateInterface;
 use Drupal\rest\Plugin\ResourceBase;
 use Drupal\rest\ResourceResponse;
 use Psr\Log\LoggerInterface;
@@ -18,7 +17,8 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
  *   id = "vue_todo_rest_resource",
  *   label = @Translation("Vue TODO Rest Resource"),
  *   uri_paths = {
- *     "canonical" = "/api/vue/todo"
+ *     "canonical" = "/api/vue/todo",
+ *     "update" = "/api/vue/todo"
  *   }
  * )
  */
@@ -30,6 +30,13 @@ class VueTODORestResource extends ResourceBase {
    * @var \Drupal\Core\Session\AccountProxyInterface
    */
   protected $currentUser;
+
+  /**
+   * Drupal\Core\State\StateInterface definition.
+   *
+   * @var \Drupal\Core\State\StateInterface
+   */
+  protected $state;
 
   /**
    * Constructs a new VueTODORestResource object.
@@ -46,6 +53,8 @@ class VueTODORestResource extends ResourceBase {
    *   A logger instance.
    * @param \Drupal\Core\Session\AccountProxyInterface $current_user
    *   A current user instance.
+   * @param \Drupal\Core\State\StateInterface $state
+   *   Drupal site current state
    */
   public function __construct(
     array $configuration,
@@ -53,10 +62,12 @@ class VueTODORestResource extends ResourceBase {
     $plugin_definition,
     array $serializer_formats,
     LoggerInterface $logger,
-    AccountProxyInterface $current_user) {
+    AccountProxyInterface $current_user,
+    StateInterface $state) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $serializer_formats, $logger);
 
     $this->currentUser = $current_user;
+    $this->state = $state;
   }
 
   /**
@@ -69,15 +80,13 @@ class VueTODORestResource extends ResourceBase {
       $plugin_definition,
       $container->getParameter('serializer.formats'),
       $container->get('logger.factory')->get('vue_todo'),
-      $container->get('current_user')
+      $container->get('current_user'),
+      $container->get('state')
     );
   }
 
   /**
    * Responds to GET requests.
-   *
-   * @param \Drupal\Core\Entity\EntityInterface $entity
-   *   The entity object.
    *
    * @return \Drupal\rest\ResourceResponse
    *   The HTTP response object.
@@ -85,7 +94,7 @@ class VueTODORestResource extends ResourceBase {
    * @throws \Symfony\Component\HttpKernel\Exception\HttpException
    *   Throws exception expected.
    */
-  public function get(EntityInterface $entity) {
+  public function get() {
 
     // You must to implement the logic of your REST Resource here.
     // Use current user after pass authentication to validate access.
@@ -93,7 +102,30 @@ class VueTODORestResource extends ResourceBase {
       throw new AccessDeniedHttpException();
     }
 
-    return new ResourceResponse($entity, 200);
+    $dependency = [
+      '#cache' => [
+        'max-age' => 0,
+      ],
+    ];
+    $data = $this->state->get('vue-todo');
+    return (new ResourceResponse($data))->addCacheableDependency($dependency);
   }
 
+  /**
+   * Responds to PUT requests.
+   *
+   * @param array $data
+   *   Given data to store into vue-todo state.
+   *
+   * @return \Drupal\rest\ResourceResponse
+   *   The HTTP response object.
+   *
+   * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+   *   Throws exception expected.
+   */
+  public function put(array $data) {
+    //
+    $this->state->set('vue-todo', $data);
+    return new ResourceResponse(['saved' => TRUE]);
+  }
 }
