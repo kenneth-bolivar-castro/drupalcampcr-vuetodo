@@ -18,10 +18,16 @@ class VueTODOBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    $build = [];
-    $build['vue_todo_block']['#markup'] = 'Implement VueTODOBlock.';
-
-    return $build;
+    return [
+      'vue_todo_block' => [
+        '#markup'   => '<div id="app"></div>',
+        '#attached' => [
+          'library' => [
+            'vue_todo/vue-todo',
+          ],
+        ],
+      ],
+    ];
   }
 
 }
