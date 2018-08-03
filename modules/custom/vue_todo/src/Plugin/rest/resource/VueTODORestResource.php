@@ -2,6 +2,7 @@
 
 namespace Drupal\vue_todo\Plugin\rest\resource;
 
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\rest\ModifiedResourceResponse;
 use Drupal\rest\Plugin\ResourceBase;
