@@ -1,0 +1,28 @@
+axios:
+  remote: https://github.com/axios/axios
+  version: "v2.5.16"
+  license:
+    name: MIT
+    url: https://github.com/axios/axios/blob/master/README.md
+    gpl-compatible: true
+  js:
+    js/axios.min.js: {}
+#    //unpkg.com/axios/dist/axios.min.js: { type: external, minified: true }
+
+vue-js:
+  remote: https://github.com/vuejs/vue
+  version: "v2.5.16"
+  license:
+    name: MIT
+    url: https://github.com/vuejs/vue/blob/dev/README.md
+    gpl-compatible: true
+  js:
+    js/vue.min.js: {}
+#    //cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js: { type: external, minified: true }
+
+vue-todo:
+  js:
+    js/vue-todo.js: {}
+  dependencies:
+  - vue_todo/axios
+  - vue_todo/vue-js
