@@ -1,5 +1,5 @@
 var markup = `
-    <div id="app">
+    <div id="app" class="vue-todo-container">
 
       <div>
         <span>New:</span><input v-model="newItem.text" name="text" type="text" />
@@ -9,18 +9,20 @@ var markup = `
 
       <hr/>
 
-      <div v-for="(todo, idx) in todos">
+      <div v-for="(todo, idx) in todos" class="vue-todo-margins">
 
-        <div>
+        <div class="vue-todo-items">
 
-          <h4>
+          <h4 class="vue-todo-margins vue-todo-inline">
             <strike v-if="todo.completed">{{todo.text}}</strike>
             <span v-else>{{todo.text}}</span>
           </h4>
 
-          <p><small>Due: {{todo.due}}</small></p>
+          <p class="vue-todo-inline">
+            <small>Due: {{todo.due}}</small>
+          </p>
 
-          <div>
+          <div class="vue-todo-inline">
             <button v-if="!todo.completed"
                     v-on:click="done(idx)">
                     Done

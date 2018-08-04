@@ -1,0 +1,19 @@
+.vue-todo-container {
+    text-align: left;
+    width: 75%;
+}
+
+.vue-todo-margins {
+    margin-left: 50px;
+    margin-bottom: 15px;
+}
+
+.vue-todo-items {
+    width: 50%;
+    border: 1px solid black;
+    border-radius: 50px 20px;
+}
+
+.vue-todo-inline {
+    display: inline-block;
+}

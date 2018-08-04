@@ -23,6 +23,9 @@ vue-js:
 vue-todo:
   js:
     js/vue-todo.js: {}
+  css:
+    component:
+      css/vue-todo.css: {}
   dependencies:
   - vue_todo/axios
   - vue_todo/vue-js
