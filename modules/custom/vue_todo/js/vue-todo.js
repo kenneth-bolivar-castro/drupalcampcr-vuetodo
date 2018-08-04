@@ -55,4 +55,12 @@ var app = new Vue({
         csrfToken: null
     },
     template: markup,
+    mounted() {
+        //
+        axios.get('/api/vue/todo?_format=json')
+            .then(response => (this.todos = response.data));
+        //
+        axios.get('/rest/session/token')
+            .then(response => (this.csrfToken = response.data));
+    }
 });
