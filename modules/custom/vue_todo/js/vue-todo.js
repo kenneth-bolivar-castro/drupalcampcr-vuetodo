@@ -55,6 +55,18 @@ var app = new Vue({
         csrfToken: null
     },
     template: markup,
+    methods: {
+        addNew: function () {
+        },
+        done: (idx) => {
+        },
+        undone: (idx) => {
+        },
+        remove: (idx) => {
+        },
+        update: (data) => {
+        }
+    },
     mounted() {
         //
         axios.get('/api/vue/todo?_format=json')
