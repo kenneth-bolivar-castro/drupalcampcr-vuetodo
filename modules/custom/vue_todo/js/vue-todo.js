@@ -75,6 +75,10 @@ var app = new Vue({
             app.update(app.todos);
         },
         remove: (idx) => {
+            //
+            app.todos = app.todos.filter((item, key) => {
+                return key !== idx
+            });
         },
         update: (data) => {
             //
