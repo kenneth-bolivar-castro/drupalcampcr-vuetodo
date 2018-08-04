@@ -73,6 +73,18 @@ var app = new Vue({
         remove: (idx) => {
         },
         update: (data) => {
+            //
+            if(null === app.csrfToken) {
+                return;
+            }
+            //
+            axios.put('/api/vue/todo?_format=json', data, {
+                headers: {'X-CSRF-Token': app.csrfToken}
+            }).then(function (response) {
+                console.log(response.data);
+            }).catch(function (error) {
+                console.error(error);
+            });
         }
     },
     mounted() {
