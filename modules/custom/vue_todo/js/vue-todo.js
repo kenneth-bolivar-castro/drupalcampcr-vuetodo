@@ -67,8 +67,12 @@ var app = new Vue({
             };
         },
         done: (idx) => {
+            app.todos[idx].completed = true;
+            app.update(app.todos);
         },
         undone: (idx) => {
+            app.todos[idx].completed = false;
+            app.update(app.todos);
         },
         remove: (idx) => {
         },
