@@ -123,9 +123,9 @@ class VueTODORestResource extends ResourceBase {
    * @throws \Symfony\Component\HttpKernel\Exception\HttpException
    *   Throws exception expected.
    */
-  public function put(array $data) {
+  public function put($data) {
     //
-    $this->state->set('vue-todo', $data);
+    $this->state->set('vue-todo', $data ?? []);
     return new ResourceResponse(['saved' => TRUE]);
   }
 }

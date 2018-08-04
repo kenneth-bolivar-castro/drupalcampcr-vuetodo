@@ -87,7 +87,10 @@ var app = new Vue({
             }
             //
             axios.put('/api/vue/todo?_format=json', data, {
-                headers: {'X-CSRF-Token': app.csrfToken}
+                headers: {
+                    'X-CSRF-Token': app.csrfToken,
+                    'Content-Type': 'application/json'
+                }
             }).then(function (response) {
                 console.log(response.data);
             }).catch(function (error) {
