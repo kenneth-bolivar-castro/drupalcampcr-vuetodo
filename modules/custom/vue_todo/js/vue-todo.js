@@ -95,6 +95,9 @@ var app = new Vue({
             });
         }
     },
+    watch: {
+        todos: (newTodos) => (app.update(newTodos))
+    },
     mounted() {
         //
         axios.get('/api/vue/todo?_format=json')
