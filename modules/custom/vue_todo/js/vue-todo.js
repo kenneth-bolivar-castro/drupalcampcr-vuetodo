@@ -43,3 +43,16 @@ var markup = `
     </div>
 `;
 
+var app = new Vue({
+    el: '#app',
+    data: {
+        newItem: {
+            text: null,
+            due: null,
+            completed: false
+        },
+        todos: null,
+        csrfToken: null
+    },
+    template: markup,
+});
