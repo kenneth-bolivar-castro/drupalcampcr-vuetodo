@@ -57,6 +57,14 @@ var app = new Vue({
     template: markup,
     methods: {
         addNew: function () {
+            //
+            app.todos.push(app.newItem);
+            //
+            app.newItem = {
+                text: null,
+                due: null,
+                completed: false
+            };
         },
         done: (idx) => {
         },
