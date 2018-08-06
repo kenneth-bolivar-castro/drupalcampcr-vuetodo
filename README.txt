@@ -1,3 +1,10 @@
+						DETAILS ABOUT THIS PROJECT
+------------------------------------------------------------------------------------------------------------------
+
+TODO: DRUPAL 8 + VUE.JS - REUSABLE COMPONENTS: https://www.keboca.com/todo-drupal-8-vuejs-reusable-components
+
+------------------------------------------------------------------------------------------------------------------
+
 
 CONTENTS OF THIS FILE
 ---------------------
